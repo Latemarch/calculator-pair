@@ -5,8 +5,10 @@ body {
   justify-content: center;
   align-items: center;
   font-weight: 600;
+  user-select: none;
 }
 .calculator {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -14,7 +16,6 @@ body {
   height: 300px;
 }
 .screen {
-  position: relative;
   display: flex;
   background-color: #323742;
   justify-content: flex-end;
@@ -28,25 +29,25 @@ body {
   color: #fdfefe;
   border-radius: 8px 8px 0px 0px;
 }
-.btn-win div {
+.status-bar__icon div {
   position: absolute;
   background-color: white;
   width: 10px;
   height: 10px;
   border-radius: 5px;
 }
-.btn-win div:first-child {
-  top: 4px;
+.status-bar__icon div:first-child {
+  top: 5px;
   left: 8px;
   background-color: #ed655a;
 }
-.btn-win div:nth-child(2) {
-  top: 4px;
+.status-bar__icon div:nth-child(2) {
+  top: 5px;
   left: 24px;
   background-color: #e1c04c;
 }
-.btn-win div:last-child {
-  top: 4px;
+.status-bar__icon div:last-child {
+  top: 5px;
   left: 40px;
   background-color: #72be47;
 }

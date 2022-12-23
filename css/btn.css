@@ -23,17 +23,16 @@
   box-sizing: border-box;
   border-left: none;
 }
-.btn-merger__right {
-  border-left: none;
-}
-.btn-merger__left {
+.btn-num0 {
   border-right: none;
-}
-.btn-edge {
-  border-radius: 0px 0px 8px 0px;
-}
-.btn-merger__left {
   border-radius: 0px 0px 0px 8px;
+  width: 198%;
+  z-index: 3;
+  justify-content: flex-start;
+  padding: 0% 40%;
+}
+.btn-equal {
+  border-radius: 0px 0px 8px 0px;
 }
 .btn:active {
   background-color: #85817e;
