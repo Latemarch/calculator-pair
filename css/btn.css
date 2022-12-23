@@ -1,0 +1,45 @@
+.panel-column:first-child .btn {
+  border-left: 0.2px solid rgba(0, 0, 0, 0.4);
+}
+.panel-column:last-child .btn {
+  background-color: #e99748;
+  color: #fdfefe;
+}
+.btn:nth-child(2n) {
+  border-bottom: none;
+  border-top: none;
+}
+.btn:first-child {
+  background-color: #434750;
+}
+.btn {
+  display: flex;
+  border: 0.2px solid rgba(0, 0, 0, 0.4);
+  background-color: #61636a;
+  width: 100%;
+  height: 20%;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-left: none;
+}
+.btn-merger__right {
+  border-left: none;
+}
+.btn-merger__left {
+  border-right: none;
+}
+.btn-edge {
+  border-radius: 0px 0px 8px 0px;
+}
+.btn-merger__left {
+  border-radius: 0px 0px 0px 8px;
+}
+.btn:active {
+  background-color: #85817e;
+}
+
+.panel-column:last-child .btn:active {
+  background-color: #e58a448a;
+  color: #fdfefe;
+}
