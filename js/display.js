@@ -1,10 +1,5 @@
 const screen = document.querySelector('.screen')
-let numNow = 0
-let strNow = 0
-export function clearStr() {
-  numNow = 0
-  strNow = 0
-}
+
 export function popLastLetter(str) {
   if (str) {
     return str.slice(0, str.length - 1)
@@ -20,22 +15,32 @@ export function popLettersUntilNum() {
 export function getLastLetter(str) {
   return str[str.length - 1]
 }
-
-export function addNum(str) {
-  let screenText = screen.innerText + str
-  let num
-  let i = screenText.length - 1
+export function getNumBackward(str, index) {
+  let i = index
   for (; i >= 0; i--) {
-    if (isNaN(screenText[i]) && screenText[i] !== '.') {
-      num = screenText.slice(i + 1, screenText.length)
-      break
-    } else {
-      num = screenText
+    if (isNaN(str[i]) && str[i] !== '.') {
+      return { num: str.slice(i + 1, index + 1), index: i }
     }
   }
+  return { num: str.slice(0, index + 1), index: i }
+}
+export function getNumForward(str, index) {
+  let i = index
+  for (; i >= 0; i++) {
+    if (isNaN(str[i]) && str[i] !== '.') {
+      return { num: str.slice(index, i), index: i }
+    }
+  }
+  return { num: str, index: i }
+}
 
-  screen.innerText = screenText.slice(0, i + 1) + Number(num)
-
+export function addNum(btnText) {
+  let screenText = screen.innerText // + btnText
+  let numDict
+  numDict = getNumBackward(screenText, screenText.length - 1)
+  numDict.num += btnText
+  screen.innerText =
+    screenText.slice(0, numDict.index + 1) + Number(numDict.num)
   controlFontSize(screen.innerText)
 }
 
@@ -61,8 +66,6 @@ export function addRules(btnText) {
   }
   screen.innerText += btnText
   controlFontSize(screen.innerText)
-  strNow = screen.innerText
-  numNow = 0
 }
 
 export function controlFontSize(str) {

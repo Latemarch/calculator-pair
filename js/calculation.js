@@ -1,52 +1,68 @@
+import * as dis from './display.js'
 export function saveLocalValue(type, value) {
   localStorage.setItem(`${type}`, JSON.stringify(value))
 }
 export function getLocalValue(type) {
   return JSON.parse(localStorage.getItem(`${type}`))
 }
-export function add(a, b) {
-  return a + b
+
+export function operators(rule, a, b) {
+  console.log('rule', rule, a, b)
+  a = parseFloat(a)
+  b = parseFloat(b)
+  switch (rule) {
+    case '+':
+      return a + b
+    case '-':
+      return a - b
+    case '*':
+      return a * b
+    case '/':
+      return a / b
+  }
 }
-export function minus(a, b) {
-  return a - b
-}
-export function orderedMulti(str) {
+export function operate(rule, str) {
+  if (!isNaN(str)) {
+    return str
+  }
   let newStr
   const lastIndex = str.length - 1
-  for (let i = 0; i < lastIndex; i++) {
-    if (str[i] === '*') {
+  let i = 0
+  for (; i < lastIndex; i++) {
+    if (str[i] === rule) {
       if (!isNaN(str[i - 1]) && !isNaN(str[i + 1])) {
+        let a = dis.getNumBackward(str, i - 1)
+        let b = dis.getNumForward(str, i + 1)
+        newStr = operators(rule, a.num, b.num)
+        console.log('dddd', newStr)
         try {
-          newStr = str.slice(0, i - 1) + str[i - 1] * str[i + 1]
-        } catch (e) {
-          newStr = str[i - 1] * str[i + 1]
-        }
+          newStr = str.slice(0, a.index + 1) + newStr // + operators(rule, str[i - 1], str[i + 1])
+        } catch (e) {}
         try {
-          newStr += str.slice(i + 2, lastIndex + 1)
+          newStr += str.slice(b.index, lastIndex + 1)
         } catch (e) {}
       }
       return newStr
     }
   }
-  return false
+  return str
 }
-export function calculateAllMultiple(str) {
-  let newStr
-  while (newStr) {
-    newStr = orderedMulti(str)
-  }
-}
-export function divide(a, b) {
-  return a / b
+export function doAllOptInStr(rule, str) {
+  let newStr = str
+  let prenewStr
+  do {
+    prenewStr = newStr
+    newStr = operate(rule, newStr)
+  } while (newStr !== prenewStr)
+  return newStr
 }
 
 export function calculation(str) {
-  let result
-  let prelength = str.length
+  let newStr
 
-  do {
-    prelength = newStr.length
-    newStr = calculateAllMultiple(str)
-  } while (newStr.length !== prelength)
+  newStr = doAllOptInStr('*', str)
+  newStr = doAllOptInStr('/', newStr)
+  newStr = doAllOptInStr('+', newStr)
+  newStr = doAllOptInStr('-', newStr)
   return newStr
 }
