@@ -34,7 +34,6 @@ export function operate(rule, str) {
         let a = dis.getNumBackward(str, i - 1)
         let b = dis.getNumForward(str, i + 1)
         newStr = operators(rule, a.num, b.num)
-        console.log('dddd', newStr)
         try {
           newStr = str.slice(0, a.index + 1) + newStr // + operators(rule, str[i - 1], str[i + 1])
         } catch (e) {}

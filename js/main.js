@@ -2,7 +2,7 @@ import * as dis from './display.js'
 import * as cal from './calculation.js'
 const screen = document.querySelector('.screen')
 const btns = document.querySelector('.btns-panel')
-const btnEqual = document.querySelector('.btn-equal')
+const btnEnter = document.querySelector('.btn-equal')
 const btnClear = document.querySelector('.btn-clear')
 const btnDot = document.querySelector('.btn-dot')
 
@@ -30,22 +30,21 @@ function onClickBtnClear() {
   screen.style.fontSize = '40px'
   dis.controlFontSize(screen.innerText)
 }
-function onClickBtnEqual() {
+function onClickBtnEnter() {
   let result
   let strOnScreen = screen.innerText
   let lastText = dis.getLastLetter(strOnScreen)
+
   if (isNaN(lastText)) {
     strOnScreen = dis.popLastLetter(strOnScreen)
     console.log('pop?', strOnScreen)
   }
-  screen.innerText = 0
 
-  screen.style.fontSize = '40px'
-  dis.controlFontSize(screen.innerText)
   result = cal.calculation(strOnScreen)
   screen.innerText = result
+  dis.controlFontSize(screen.innerText)
 }
 
 btns.addEventListener('click', onClickDisplayBtn)
 btnClear.addEventListener('click', onClickBtnClear)
-btnEqual.addEventListener('click', onClickBtnEqual)
+btnEnter.addEventListener('click', onClickBtnEnter)
